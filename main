@@ -8,14 +8,9 @@ set -e
 
 tt=$(jq -r .tt config.json)
 
-# create symbolic link here
-tt_base_name=${tt##*/}
-rm -f ${tt_base_name}
-ln -s ${tt} data.${tt_base_name}
 
-
-time singularity exec -e docker://dsistudio/dsistudio dsi_studio --action=exp --source=data.${tt_base_name} --output=data.${tt_base_name}.trk.gz
+time singularity exec -e docker://dsistudio/dsistudio dsi_studio --action=exp --source=${tt} --output=data.${tt##*/}.trk.gz
 
 # move file to trk folder
 mkdir -p track
-mv data.${tt_base_name}.trk.gz track/trk.gz
+mv data.${tt##*/}.trk.gz track/trk.gz
