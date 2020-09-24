@@ -8,11 +8,10 @@ set -e
 
 tt=$(jq -r .tt config.json)
 
-
 time singularity exec -e docker://dsistudio/dsistudio dsi_studio --action=exp --source=${tt} --output=data.${tt##*/}.trk.gz
 
 gunzip data.${tt##*/}.trk.gz 
 
 # move file to trk folder
 mkdir -p track
-mv data.${tt##*/}.trk track/trk.gz
+mv data.${tt##*/}.trk track/track.trk
