@@ -1,20 +1,17 @@
 #!/bin/bash
 #PBS -l nodes=1:ppn=1
 #PBS -l vmem=8gb
-#PBS -l walltime=12:00:00
+#PBS -l walltime=1:00:00
 #PBS -N dsi-studio-tt2trk
 
-time singularity exec -e docker://brainlife/mrtrix3:3.0.0 ./mrtrix3_tracking.sh
+set -e  
 
-# tt=$(jq -r .tt config.json)
+tt=$(jq -r .tt config.json)
 
-# time singularity exec -e docker://dsistudio/dsistudio dsi_studio --action=exp --source=${tt} --output=data.${tt##*/}.trk.gz
+time singularity exec -e docker://dsistudio/dsistudio dsi_studio --action=exp --source=${tt} --output=data.${tt##*/}.trk.gz
 
-# gunzip data.${tt##*/}.trk.gz 
+gunzip data.${tt##*/}.trk.gz 
 
 # move file to trk folder
-# mkdir -p track
-# mv data.${tt##*/}.trk track/track.trk
-
-
-
+mkdir -p track
+mv data.${tt##*/}.trk track/track.trk
