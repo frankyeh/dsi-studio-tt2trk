@@ -650,6 +650,9 @@ mrconvert 5tt.mif -stride 1,2,3,4 5tt.nii.gz -force -nthreads $NCORE -quiet
 ## 5 tissue type visualization
 mrconvert ${mask}.mif -stride 1,2,3,4 mask.nii.gz -force -nthreads $NCORE -quiet
 
+## clean up
+rm -rf tmp
+rm -rf *.mif
 
 ## can seed cc ROI extra as well if FreeSufer is passed and the ROI is made
 # tckgen -algorithm iFOD2 -select 10000 -act 5tt.mif -backtrack -crop_at_gmwmi -seed_image cc.mif -grad $grad $FODM cc.tck -force -nthreads $NCORE -quiet
